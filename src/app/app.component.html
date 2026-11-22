@@ -1,0 +1,48 @@
+@if (auth.logoutMessage()) {
+  <div style="position: fixed; top: 20px; right: 20px; z-index: 9999;" class="msg good">
+    {{ auth.logoutMessage() }}
+  </div>
+}
+
+<div [class.shell]="auth.user()">
+  @if (auth.user()) {
+    <aside class="sidebar noprint">
+
+      <div class="side-profile">
+        <div class="side-app">
+          <img class="side-logo" src="/logo.png" [alt]="company.short">
+        </div>
+        <div class="side-company">{{ auth.organization() || company.name }}</div>
+      </div>
+
+      <nav class="side-nav">
+        <a class="side-link" routerLink="/dashboard" routerLinkActive="on">
+          <svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          <span class="lbl">Dashboard</span>
+        </a>
+        <a class="side-link" routerLink="/inventory" routerLinkActive="on">
+          <svg class="ic" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
+          <span class="lbl">Inventory</span>
+        </a>
+        <a class="side-link" routerLink="/employees" routerLinkActive="on">
+          <svg class="ic" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span class="lbl">Employees</span>
+        </a>
+        <a class="side-link" routerLink="/distribution" routerLinkActive="on">
+          <svg class="ic" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          <span class="lbl">Issue supplies</span>
+        </a>
+        <a class="side-link" routerLink="/reports" routerLinkActive="on">
+          <svg class="ic" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          <span class="lbl">Reports</span>
+        </a>
+      </nav>
+
+    </aside>
+  }
+
+  <main [class.page]="auth.user()">
+    @if (auth.user()) { <app-topbar /> }
+    <router-outlet />
+  </main>
+</div>
